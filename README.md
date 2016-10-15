@@ -7,14 +7,16 @@
 ```sh
 $ npm install --save json-to-env
 ```
+or
+```sh
+$ npm install -g json-to-env
+```
 
 
 ## Usage
 
-```js
-var jsonToEnv = require('json-to-env');
-
-jsonToEnv('Rainbow');
+```sh
+$ json-to-env <inputfile.json> <outputfile.config> <options>
 ```
 
 ## License
