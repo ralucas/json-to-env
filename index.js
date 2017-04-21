@@ -7,7 +7,7 @@ var OPTIONS = {
   version: {
     commands: ['--version', '-V'],
     text: 'Returns the version',
-    value: function() {
+    out: function() {
       process.stdout.write('Version: ' + pkg.version + '\n');
       process.exit(0);
     }
@@ -15,14 +15,19 @@ var OPTIONS = {
   help: {
     commands: ['--help', '-h'],
     text: 'Returns how to use json-to-env',
-    value: function() {
+    out: function() {
       return printUsage();
     }
   },
   verbose: {
     commands: ['--verbose', '-v'],
     text: 'Runs it in verbose'
+  },
+  key: {
+    commands: ['--key', '-k'],
+    text: 'Specify a key to be converted (can be an object or string)'
   }
+
 };
 
 function printUsage() {
@@ -42,13 +47,24 @@ function getOptions(optionArr, optionalCmds) {
   // Check for any options
   var options = OPTIONS;
   var opts = optionArr.filter(function(arg) {
+    if ((/\=/).test(arg)) {
+      arg = arg.split('=')[0];
+    }
     return ~optionalCmds.indexOf(arg);
   }).map(function(o) {
     var obj = {};
+    var value = '';
+    if ((/\=/).test(o)) {
+      value = o.split('=')[1];
+      o = o.split('=')[0];
+    }
     if ( o ) {
       for (var m in options) {
         if ( ~options[m].commands.indexOf(o) ) {
           obj[m] = options[m];
+          if (value) {
+            obj[m].value = value;
+          }
           return obj;
         }
       } 
@@ -58,8 +74,8 @@ function getOptions(optionArr, optionalCmds) {
   opts.forEach(function(cmd) {
     if ( cmd ) {
       for (var k in cmd) {
-        if ( cmd[k].value ) {
-          cmd[k].value();
+        if ( cmd[k].out) {
+          cmd[k].out();
         }
       }
     }
@@ -94,7 +110,7 @@ function parseArgs(args) {
   if ( opts.length ) {
     opts.forEach(function(opt) {
       var key = Object.keys(opt);
-      out[key[0]] = opt;
+      out[key[0]] = opt[key[0]];
     });
   }
   return out; 

@@ -1,1 +1,9 @@
-{"test": "hi", "whatsUp": "there"}
+{
+  "test": "hi friend", 
+  "whatsUp": "there is a new one",
+  "nested": {
+    "bark": "hola friendo",
+    "aNewOne": "oak",
+    "anotherOne": "maple tree"
+  }
+}
