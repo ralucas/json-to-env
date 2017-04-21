@@ -1,6 +1,6 @@
 {
   "name": "json-to-env",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Convert json to key-value environment pairs",
   "homepage": "",
   "repository": "ralucas/json-to-env",

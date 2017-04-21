@@ -38,8 +38,8 @@ output:
 ```
 export TEST1="a test"
 export TEST_THE_TEST="another test"
-export NESTED_TEST3=hello
-export NESTED_A_NEW_ONE=goodbye
+export NESTED_TEST3="hello"
+export NESTED_A_NEW_ONE="goodbye"
 ```
 
 ## License
