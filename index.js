@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var jsonToEnv = require('./lib');
 var pkg = require('./package.json');
 
@@ -106,7 +108,6 @@ function parseArgs(args) {
   out.output = args.shift();
 
   opts = getOptions(args, optCmds);
-
   if ( opts.length ) {
     opts.forEach(function(opt) {
       var key = Object.keys(opt);
@@ -116,10 +117,22 @@ function parseArgs(args) {
   return out; 
 }
 if ( !args.length ) {
-  return process.stdout.write(printUsage());
+  process.stdout.write(printUsage());
+  return process.exit(0);
 }
 
 var config = parseArgs(args);
+
+if (config.help) {
+  process.stdout.write(printUsage());
+  return process.exit(0);
+}
+
+if (config.version) {
+  var pkg = require('package.json');
+  process.stdout.write('json-to-env version: ' + pkg.version);
+  return process.exit(0);
+}
 
 if (config.verbose) {
   process.stdout.write('Running verbose mode\nStarting...\n');

@@ -1,6 +1,6 @@
 {
   "name": "json-to-env",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Convert json to key-value environment pairs",
   "homepage": "",
   "repository": "ralucas/json-to-env",
@@ -8,6 +8,9 @@
     "name": "R.A. Lucas",
     "email": "richard@richardalucas.com",
     "url": "ralucas.github.io"
+  },
+  "bin": {
+    "json-to-env": "index.js"
   },
   "files": [
     "lib",
